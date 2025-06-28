@@ -20,7 +20,7 @@ spec:
             - containerPort: 3002
           env:
             - name: DB_TYPE
-              value: "cosmos" # or "sql"
+              value: "sql" # or "sql"
             - name: CONNECTION_STRING
               valueFrom:
                 secretKeyRef:
