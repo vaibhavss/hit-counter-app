@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: frontend-service
-          image: your-registry/frontend-service:latest
+          image: vaibhavdocked/frontend-service:latest
           ports:
             - containerPort: 3000
           env:

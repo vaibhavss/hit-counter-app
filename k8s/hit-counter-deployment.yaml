@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: hit-counter-service
-          image: your-registry/hit-counter-service:latest
+          image: vaibhavdocked/hit-counter-service:latest
           ports:
             - containerPort: 3002
           env:
