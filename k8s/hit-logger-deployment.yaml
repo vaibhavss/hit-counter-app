@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: hit-logger-service
-          image: vaibhavdocked/hit-logger-service:latest
+          image: vaibhavdocked/hit-logger-service:v1
           ports:
             - containerPort: 3001
           env:
