@@ -1,0 +1,30 @@
+# Stage 1: Build dependencies
+FROM node:18-alpine AS builder
+
+WORKDIR /app
+
+# Copy dependency descriptor
+COPY package.json ./
+
+# Install production dependencies only
+RUN npm install --omit=dev
+
+# Copy app source
+COPY . .
+
+# Stage 2: Slim runtime container
+FROM node:18-alpine
+
+WORKDIR /app
+
+# Copy built app from builder stage
+COPY --from=builder /app .
+
+# Create a non-root user
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+USER appuser
+
+EXPOSE 3001
+
+CMD ["node", "server.js"]
+
