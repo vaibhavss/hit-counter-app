@@ -1,0 +1,28 @@
+# Stage 1: Builder
+FROM node:18-alpine AS builder
+
+WORKDIR /app
+
+# Install production-only dependencies
+COPY package.json ./
+RUN npm install --omit=dev
+
+# Copy application source
+COPY . .
+
+# Stage 2: Minimal runtime container
+FROM node:18-alpine
+
+WORKDIR /app
+
+# Copy only necessary files from builder
+COPY --from=builder /app .
+
+# Add non-root user for security
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+USER appuser
+
+EXPOSE 3002
+
+CMD ["node", "server.js"]
+
